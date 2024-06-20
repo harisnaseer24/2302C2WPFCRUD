@@ -10,13 +10,11 @@ namespace _2302C2WPFCRUD
         public MainWindow()
         {
             InitializeComponent();
+            LoadProducts();
         }
 
 
         SqlConnection Conn = new SqlConnection("Data Source=.;Initial Catalog=2302C2WPFCRUD;User ID=sa;Password=aptech;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-
-
-       
 
         private void ClearData()
         {
@@ -31,15 +29,27 @@ namespace _2302C2WPFCRUD
         {
             ClearData();
         }
+          private void LoadProducts()
+        {
+            SqlCommand getProducts = new SqlCommand("SELECT * FROM products",Conn);
+            Conn.Open();
+            DataTable products = new DataTable();
+
+
+           SqlDataReader reader = getProducts.ExecuteReader();
+         
+            products.Load(reader);
+            Conn.Close();
+            productGrid.ItemsSource = products.DefaultView;
+
+        }
+
 
         private bool isValid()
         {
             if (pname.Text == string.Empty || desc.Text == string.Empty || price.Text == string.Empty || qty.Text == string.Empty || cat.Text == string.Empty) {
-
-
                 MessageBox.Show("All fields are required", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
-
             }
             else
             {
@@ -66,6 +76,7 @@ namespace _2302C2WPFCRUD
                 Conn.Close();
                 MessageBox.Show("Product inserted successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 ClearData();
+                LoadProducts();
 
             }
         }
