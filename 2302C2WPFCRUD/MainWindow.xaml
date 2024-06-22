@@ -22,11 +22,11 @@
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="17,19,0,0" TextWrapping="Wrap" Text="Enter Product Details" VerticalAlignment="Top" Height="30" Width="208" Foreground="#FF7F27ED" FontSize="20" FontWeight="Bold"/>
         <DataGrid x:Name="productGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="222,92,25,182"/>
         <TextBlock x:Name="textBlock_Copy" TextAlignment="Center" HorizontalAlignment="Left" Margin="230,19,0,0" TextWrapping="Wrap" Text="Our Products" VerticalAlignment="Top" Height="30" Width="545" Foreground="#FF7F27ED" FontSize="24" FontWeight="ExtraBlack" FontStyle="Italic"/>
-        <Button x:Name="delete" Content="Delete" HorizontalAlignment="Left" Margin="502,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.025,0.754" Height="30" Width="203" Background="#FF7F27ED" BorderBrush="#FF9163F9" Foreground="White" FontFamily="Arial Black" FontSize="12" FontStyle="Italic"/>
-        <Button x:Name="update" Content="Update" HorizontalAlignment="Left" Margin="230,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.025,0.754" Height="30" Width="200" Background="#FF7F27ED" BorderBrush="#FF9163F9" Foreground="White" FontFamily="Arial Black" FontSize="12" FontStyle="Italic" />
+        <Button x:Name="delete" Content="Delete" HorizontalAlignment="Left" Margin="502,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.025,0.754" Height="30" Width="203" Background="#FF7F27ED" BorderBrush="#FF9163F9" Foreground="White" FontFamily="Arial Black" FontSize="12" FontStyle="Italic" Click="DeleteProduct"/>
+        <Button x:Name="update" Content="Update" HorizontalAlignment="Left" Margin="230,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.025,0.754" Height="30" Width="200" Background="#FF7F27ED" BorderBrush="#FF9163F9" Foreground="White" FontFamily="Arial Black" FontSize="12" FontStyle="Italic" Click="UpdateProduct" />
         <Label x:Name="label_Copy4" Content="Product Id" HorizontalAlignment="Left" Margin="237,287,0,0" VerticalAlignment="Top" Width="73"/>
-        <TextBox x:Name="cat_Copy" HorizontalAlignment="Left" Margin="310,291,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85"/>
-        <Button x:Name="fetch" Content="Fetch" HorizontalAlignment="Left" Margin="400,291,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.025,0.754" Height="21" Width="40" Background="#FF7F27ED" BorderBrush="#FF9163F9" Foreground="White" FontFamily="Arial Black" FontSize="10" FontStyle="Italic"/>
+        <TextBox x:Name="pid" HorizontalAlignment="Left" Margin="310,291,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="85"/>
+        <Button x:Name="fetch" Content="Fetch" HorizontalAlignment="Left" Margin="400,291,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.025,0.754" Height="21" Width="40" Background="#FF7F27ED" BorderBrush="#FF9163F9" Foreground="White" FontFamily="Arial Black" FontSize="10" FontStyle="Italic" Click="FetchProduct"/>
 
     </Grid>
 </Window>

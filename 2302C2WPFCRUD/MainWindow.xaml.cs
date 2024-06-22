@@ -23,6 +23,7 @@ namespace _2302C2WPFCRUD
             price.Clear();
             qty.Clear();
             cat.Clear();
+            pid.Clear();
         }
 
         private void ClearFeilds(object sender, RoutedEventArgs e)
@@ -79,6 +80,82 @@ namespace _2302C2WPFCRUD
                 LoadProducts();
 
             }
+        }
+
+        private void DeleteProduct(object sender, RoutedEventArgs e)
+        {
+            if(pid.Text!= string.Empty)
+            {
+                SqlCommand delProd = new SqlCommand("Delete from products where Id=@pid", Conn);
+                delProd.CommandType = CommandType.Text;
+                delProd.Parameters.AddWithValue("@pid", pid.Text);
+                Conn.Open();
+                delProd.ExecuteNonQuery();
+                Conn.Close();
+                MessageBox.Show("Product Deleted successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClearData();
+                LoadProducts();
+            }
+            else
+            {
+                MessageBox.Show("We need product id to delete it.", "Can't Delete without id", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void FetchProduct(object sender, RoutedEventArgs e)
+        {
+            if (pid.Text != string.Empty)
+            {
+                SqlCommand getProduct = new SqlCommand("SELECT * from products where Id=@pid", Conn);
+                getProduct.CommandType = CommandType.Text;
+                getProduct.Parameters.AddWithValue("@pid", pid.Text);
+
+                Conn.Open();
+                SqlDataReader reader = getProduct.ExecuteReader();
+                if (reader.Read())
+                {
+                    pname.Text = reader["pname"].ToString();
+                    desc.Text = reader["description"].ToString();
+                    price.Text = reader["price"].ToString();
+                    qty.Text = reader["qty"].ToString();
+                    cat.Text = reader["category"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Id.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                Conn.Close();
+
+            }
+            else
+            {
+                MessageBox.Show("We need product id to update it.", "Can't update without id", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+
+        private void UpdateProduct(object sender, RoutedEventArgs e)
+        {
+            if (isValid())
+            {
+                SqlCommand updProd = new SqlCommand("Update products set pname=@pname, description=@desc, price=@price,qty=@qty, category=@cat Where Id=@pid;",Conn);
+                    updProd.CommandType = CommandType.Text;
+
+                updProd.Parameters.AddWithValue("@pname", pname.Text);
+                updProd.Parameters.AddWithValue("@desc", desc.Text);
+                updProd.Parameters.AddWithValue("@price", price.Text);
+                updProd.Parameters.AddWithValue("@qty", qty.Text);
+                updProd.Parameters.AddWithValue("@cat", cat.Text);
+                updProd.Parameters.AddWithValue("@pid", pid.Text);
+                Conn.Open();
+                updProd.ExecuteNonQuery();
+
+                Conn.Close();
+                MessageBox.Show("Product Update successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClearData();
+                LoadProducts();
+            }
+
         }
     }
 }
